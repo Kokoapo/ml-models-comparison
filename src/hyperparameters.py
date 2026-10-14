@@ -15,7 +15,8 @@ NB = {}
 
 SVM = {
     'C': 1.0,                      # [0.01, 0.1, 1.0, 10, 100],
-    'kernel': 'linear'             # ['linear', 'rbf', 'poly', 'sigmoid']
+    'kernel': 'linear',            # ['linear', 'rbf', 'poly', 'sigmoid']
+    'probability': True
 }
 
 MLP = {

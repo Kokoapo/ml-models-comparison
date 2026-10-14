@@ -4,7 +4,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from sklearn.neural_network import MLPClassifier
-from sklearn.ensemble import RandomForestClassifier, BaggingClassifier, AdaBoostClassifier
+from sklearn.ensemble import RandomForestClassifier, BaggingClassifier, AdaBoostClassifier, VotingClassifier
 from sklearn.metrics import accuracy_score
 import kagglehub, os, hyperparameters as hyperparameters
 import pandas as pd
@@ -58,7 +58,27 @@ if __name__ == "__main__":
             "MLP": setup_model("MLP", **hyperparameters.MLP),
             "RF": setup_model("RF", **hyperparameters.RF),
             "Bagging": setup_model("Bagging", **hyperparameters.BAGGING),
-            "Boosting": setup_model("Boosting", **hyperparameters.BOOSTING)
+            "Boosting": setup_model("Boosting", **hyperparameters.BOOSTING),
+            "VM": VotingClassifier(
+                estimators=[
+                    ("KNN", setup_model("KNN", **hyperparameters.KNN)),
+                    ("AD", setup_model("AD", **hyperparameters.AD)),
+                    ("NB", setup_model("NB", **hyperparameters.NB)),
+                    ("SVM", setup_model("SVM", **hyperparameters.SVM)),
+                    ("MLP", setup_model("MLP", **hyperparameters.MLP))
+                ],
+                voting='hard'
+            ),
+            "RS": VotingClassifier(
+                estimators=[
+                    ("KNN", setup_model("KNN", **hyperparameters.KNN)),
+                    ("AD", setup_model("AD", **hyperparameters.AD)),
+                    ("NB", setup_model("NB", **hyperparameters.NB)),
+                    ("SVM", setup_model("SVM", **hyperparameters.SVM)),
+                    ("MLP", setup_model("MLP", **hyperparameters.MLP))
+                ],
+                voting='soft'
+            )
         }
         for name, model in models.items():
             X_train, X_val, X_test, y_train, y_val, y_test = preprocess()
