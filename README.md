@@ -22,7 +22,8 @@ There are, in total, 10 approaches used in this project:
 
 | Model Name        | Type                      |
 | :---              | :----:                    |
-| KNN               | Monolithic                | 
+| KNN               | Monolithic                |
+| Decision Tree     | Monolithic                | 
 | Naive Bayes       | Monolithic                |
 | SVM               | Monolithic                |
 | MLP               | Monolithic                |
@@ -31,3 +32,5 @@ There are, in total, 10 approaches used in this project:
 | Boosting          | Multiple Classifiers      |
 | Sum Rule          | Multiple Classifiers      |
 | Majoritary Voting | Multiple Classifiers      |
+
+It is important to notice that both **Sum Rule** and **Majoritary Voting** uses all the Monolithic methods as estimators
